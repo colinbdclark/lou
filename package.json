@@ -1,0 +1,19 @@
+{
+    "name": "lou",
+    "description": "Lou, a sound installation by Colin Clark",
+    "version": "2.0.0",
+    "author": "Colin Clark",
+    "repository": "git://github.com/colinbdclark/lou.git",
+    "bugs": "http://github.com/colinbdclark/lou/issues",
+    "homepage": "http://github.com/colinbdclark/lou",
+    "readmeFilename": "README.md",
+    "dependencies": {
+        "bergson": "colinbdclark/bergson#infusion-2.x",
+        "samfisher": "colinbdclark/samfisher",
+        "flocking": "colinbdclark/flocking#core-refactoring"
+    },
+    "license": "MIT",
+    "engines": {
+        "node" : "0.12.x"
+    }
+}
