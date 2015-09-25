@@ -4,7 +4,10 @@
         <meta charset="UTF-8" />
         <title>Lou</title>
 
-        <script src="node_modules/flocking/dist/flocking-all.js"></script>
+        <script>
+            window.$ = window.jQuery = require("jquery");
+        </script>
+        <script src="node_modules/flocking/dist/flocking-no-jquery.js"></script>
         <script src="node_modules/bergson/dist/bergson-only.js"></script>
         <script src="node_modules/samfisher/dist/samfisher-only.js"></script>
 

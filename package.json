@@ -1,19 +1,22 @@
 {
     "name": "lou",
     "description": "Lou, a sound installation by Colin Clark",
+    "main": "main.js",
     "version": "2.0.0",
     "author": "Colin Clark",
+    "license": "MIT",
     "repository": "git://github.com/colinbdclark/lou.git",
     "bugs": "http://github.com/colinbdclark/lou/issues",
     "homepage": "http://github.com/colinbdclark/lou",
     "readmeFilename": "README.md",
     "dependencies": {
+        "jquery": "2.1.4",
         "bergson": "colinbdclark/bergson#infusion-2.x",
         "samfisher": "colinbdclark/samfisher",
-        "flocking": "colinbdclark/flocking#core-refactoring"
+        "flocking": "colinbdclark/flocking#core-refactoring",
+        "electron-prebuilt": "0.33.2"
     },
-    "license": "MIT",
-    "engines": {
-        "node" : "0.12.x"
+    "scripts": {
+        "start": "electron main.js"
     }
 }
