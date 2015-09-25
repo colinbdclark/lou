@@ -14,7 +14,8 @@
         "bergson": "colinbdclark/bergson#infusion-2.x",
         "samfisher": "colinbdclark/samfisher",
         "flocking": "colinbdclark/flocking#core-refactoring",
-        "electron-prebuilt": "0.33.2"
+        "electron-prebuilt": "0.33.2",
+        "ws": "0.8.0"
     },
     "scripts": {
         "start": "electron main.js"

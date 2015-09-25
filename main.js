@@ -1,6 +1,17 @@
 var app = require("app"),
     BrowserWindow = require("browser-window"),
-    mainWindow;
+    windows = {};
+
+function createWindow (name, url, options) {
+    var window = new BrowserWindow(options);
+    windows[name] = window;
+    window.loadUrl(url);
+    window.on("closed", function() {
+        delete windows[name];
+    });
+
+    return window;
+}
 
 app.on("window-all-closed", function() {
     if (process.platform !== "darwin") {
@@ -9,14 +20,13 @@ app.on("window-all-closed", function() {
 });
 
 app.on("ready", function() {
-    mainWindow = new BrowserWindow({
-        width: 640,
-        height: 480
+    createWindow("audio", "file://" + __dirname + "/html/audio.html", {
+        width: 100,
+        height: 100
     });
 
-    mainWindow.loadUrl("file://" + __dirname + "/index.html");
-
-    mainWindow.on("closed", function() {
-        mainWindow = undefined;
+    createWindow("tracking", "file://" + __dirname + "/html/motion-tracker.html", {
+        width: 640,
+        height: 480
     });
 });

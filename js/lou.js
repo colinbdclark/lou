@@ -3,17 +3,13 @@
 
     flock.init({
         numBuses: 6,
-        bufferSize: 8192
+        bufferSize: 2048
     });
 
     fluid.defaults("colin.lou", {
         gradeNames: "fluid.component",
 
         components: {
-            motionTracker: {
-                type: "fisher.motionTracker"
-            },
-
             left: {
                 type: "colin.lou.instrument.left"
             },

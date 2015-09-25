@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Lou</title>
+
+        <script>
+            window.$ = window.jQuery = require("jquery");
+        </script>
+        <script src="../node_modules/flocking/dist/flocking-no-jquery.js"></script>
+        <script src="../js/lou-synths.js"></script>
+        <script src="../js/lou.js"></script>
+    </head>
+    <body>
+        <webview src="motion-tracker.html" nodeintegration></webview>
+
+        <script>
+            window.lou = colin.lou();
+        </script>
+    </body>
+</html>
