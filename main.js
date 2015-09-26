@@ -1,5 +1,7 @@
 var app = require("app"),
+    ws = require("ws"),
     BrowserWindow = require("browser-window"),
+    electronUtils = require(__dirname + "/js/electron-utils.js"),
     windows = {};
 
 function createWindow (name, url, options) {
@@ -29,4 +31,6 @@ app.on("ready", function() {
         width: 640,
         height: 480
     });
+
+    electronUtils.ipcRelay("motionUpdate", windows.audio);
 });
