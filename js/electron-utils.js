@@ -11,10 +11,12 @@ var colin = {};
         },
 
         ipcRelay: function (channel, target) {
+            var args = [channel];
+
             ipc.on(channel, function () {
-                var args = [channel];
+                args.length = arguments.length;
                 for (var i = 1; i < arguments.length; i++) {
-                    args.push(arguments[i]);
+                    args[i] = arguments[i];
                 }
 
                 if (target) {
