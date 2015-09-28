@@ -12,7 +12,7 @@
     "dependencies": {
         "jquery": "2.1.4",
         "bergson": "colinbdclark/bergson#infusion-2.x",
-        "samfisher": "colinbdclark/samfisher",
+        "samfisher": "colinbdclark/samfisher#performance",
         "flocking": "colinbdclark/flocking#core-refactoring",
         "electron-prebuilt": "0.33.2"
     },

@@ -3,7 +3,7 @@
 
     flock.init({
         numBuses: 6,
-        bufferSize: 2048
+        bufferSize: 8192
     });
 
     fluid.defaults("colin.lou", {
