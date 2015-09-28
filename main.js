@@ -1,5 +1,4 @@
 var app = require("app"),
-    ws = require("ws"),
     BrowserWindow = require("browser-window"),
     electronUtils = require(__dirname + "/js/electron-utils.js"),
     windows = {};
