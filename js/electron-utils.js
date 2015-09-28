@@ -12,16 +12,14 @@ var colin = {};
 
         ipcRelay: function (channel, target) {
             ipc.on(channel, function () {
-                if (!target) {
-                    return;
-                }
-                
                 var args = [channel];
                 for (var i = 1; i < arguments.length; i++) {
                     args.push(arguments[i]);
                 }
 
-                target.send.apply(target, args);
+                if (target) {
+                    target.send.apply(target, args);
+                }
             });
         }
     };
