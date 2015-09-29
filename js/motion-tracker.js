@@ -5,7 +5,9 @@
         gradeNames: "fisher.motionTracker",
 
         listeners: {
-            onMotionUpdate: "colin.electron.ipcSend(motionUpdate, {arguments})"
+            onMotionUpdate: [
+                "colin.electron.ipcSend(motionUpdate, {arguments})"
+            ]
         }
     });
 }());
