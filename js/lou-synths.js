@@ -3,6 +3,7 @@
 (function () {
     "use strict";
 
+    // TODO: Convert this to a flock.band?
     fluid.defaults("colin.lou.instrument", {
         gradeNames: "fluid.component",
 
@@ -155,17 +156,25 @@
     });
 
     fluid.defaults("colin.lou.synths.drumClock", {
-        gradeNames: "colin.lou.synths.clock.motion",
+        gradeNames: ["colin.lou.synths.clock.motion", "flock.modelSynth"],
 
         pulse: 1,
 
         synthDef: {
             bus: 4
+        },
+
+        model: {
+            motion: {
+                model: {
+                    value: "{lou}.motionResponder.model.leftMotion"
+                }
+            }
         }
     });
 
     fluid.defaults("colin.lou.synths.drumBass", {
-        gradeNames: "flock.synth",
+        gradeNames: "flock.modelSynth",
 
         synthDef: [
             // Drum
@@ -205,11 +214,19 @@
                 },
                 mul: 0.75
             },
-        ]
+        ],
+
+        model: {
+            motion: {
+                model: {
+                    value: "{lou}.motionResponder.model.rightMotion"
+                }
+            }
+        }
     });
 
     fluid.defaults("colin.lou.synths.pianoGuitar", {
-        gradeNames: "flock.synth",
+        gradeNames: "flock.modelSynth",
 
         synthDef: [
             // Piano
@@ -293,7 +310,30 @@
                     url: "../audio/44100/guitar-combined-44100.wav"
                 }
             }
-        ]
+        ],
+
+        model: {
+            pianoStart: {
+                model: {
+                    value: "{lou}.motionResponder.model.leftMotion"
+                }
+            },
+            pianoEnd: {
+                model: {
+                    value: "{lou}.motionResponder.model.leftMotion"
+                }
+            },
+            guitarStart: {
+                model: {
+                    value: "{lou}.motionResponder.model.rightMotion"
+                }
+            },
+            guitarEnd: {
+                model: {
+                    value: "{lou}.motionResponder.model.rightMotion"
+                }
+            }
+        }
     });
 
     colin.lou.synths.convertBeatsToFreq = function (beats, bpm) {

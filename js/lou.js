@@ -16,6 +16,10 @@
 
             right: {
                 type: "colin.lou.instrument.right"
+            },
+
+            motionResponder: {
+                type: "colin.lou.motionResponder"
             }
         },
 

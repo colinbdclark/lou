@@ -31,5 +31,5 @@ app.on("ready", function() {
         height: 480
     });
 
-    electronUtils.ipcRelay("motionUpdate", windows.audio);
+    electronUtils.ipcRelay("motion", windows.audio);
 });

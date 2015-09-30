@@ -6,23 +6,24 @@ var colin = {};
     var ipc = require("ipc");
 
     colin.electron = {
-        ipcSend: function (channel, args) {
-            ipc.send(channel, args);
-        },
-
-        ipcRelay: function (channel, target) {
+        ipcSender: function (channel, target) {
             var args = [channel];
 
-            ipc.on(channel, function () {
-                args.length = arguments.length;
-                for (var i = 1; i < arguments.length; i++) {
-                    args[i] = arguments[i];
+            return function () {
+                var len = arguments.length + 1;
+                args.length = len;
+                for (var i = 1; i < len; i++) {
+                    args[i] = arguments[i - 1];
                 }
 
                 if (target) {
                     target.send.apply(target, args);
                 }
-            });
+            };
+        },
+
+        ipcRelay: function (channel, target) {
+            ipc.on(channel, colin.electron.ipcSender(channel, target));
         }
     };
 
