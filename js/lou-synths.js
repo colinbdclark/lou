@@ -101,7 +101,9 @@
                             steps: 4,
                             source: {
                                 id: "motion",
-                                ugen: "colin.lou.ugen.dynamicValue",
+                                ugen: "flock.ugen.value",
+                                rate: "control",
+                                value: 0,
                                 mul: 3
                             },
                             mul: 0.5,
@@ -165,9 +167,9 @@
         },
 
         model: {
-            motion: {
-                model: {
-                    value: "{lou}.motionResponder.model.leftMotion"
+            inputs: {
+                motion: {
+                    value: "{motionResponder}.model.leftMotion"
                 }
             }
         }
@@ -180,6 +182,7 @@
             // Drum
             {
                 ugen: "flock.ugen.playBuffer",
+                loop: 1.0,
                 mul: 0.5,
                 trigger: {
                     id: "drumTrigger",
@@ -205,8 +208,9 @@
                         time: 10,
                         source: {
                             id: "motion",
-                            ugen: "colin.lou.ugen.dynamicValue",
+                            ugen: "flock.ugen.value",
                             rate: "audio",
+                            value: 0,
                             mul: 0.75,
                             add: 1.0
                         }
@@ -217,9 +221,9 @@
         ],
 
         model: {
-            motion: {
-                model: {
-                    value: "{lou}.motionResponder.model.rightMotion"
+            inputs: {
+                motion: {
+                    value: "{motionResponder}.model.rightMotion"
                 }
             }
         }
@@ -232,13 +236,16 @@
             // Piano
             {
                 ugen: "flock.ugen.playBuffer",
+                loop: 1.0,
                 mul: 0.25,
                 start: {
                     ugen: "colin.lou.ugen.quantize",
                     steps: 2,
                     source: {
                         id: "pianoStart",
-                        ugen: "colin.lou.ugen.dynamicValue",
+                        ugen: "flock.ugen.value",
+                        rate: "control",
+                        value: 0,
                         mul: 2
                     }
                 },
@@ -253,7 +260,9 @@
                         },
                         source: {
                             id: "pianoEnd",
-                            ugen: "colin.lou.ugen.dynamicValue",
+                            ugen: "flock.ugen.value",
+                            rate: "control",
+                            value: 0,
                             mul: 2
                         }
                     },
@@ -273,13 +282,16 @@
             // Guitar
             {
                 ugen: "flock.ugen.playBuffer",
+                loop: 1.0,
                 mul: 0.5,
                 start: {
                     ugen: "colin.lou.ugen.quantize",
                     steps: 2,
                     source: {
                         id: "guitarStart",
-                        ugen: "colin.lou.ugen.dynamicValue",
+                        ugen: "flock.ugen.value",
+                        rate: "control",
+                        value: 0,
                         mul: 2
                     }
                 },
@@ -294,7 +306,9 @@
                         },
                         source: {
                             id: "guitarEnd",
-                            ugen: "colin.lou.ugen.dynamicValue",
+                            ugen: "flock.ugen.value",
+                            rate: "control",
+                            value: 0,
                             mul: 2
                         }
                     },
@@ -313,24 +327,18 @@
         ],
 
         model: {
-            pianoStart: {
-                model: {
-                    value: "{lou}.motionResponder.model.leftMotion"
-                }
-            },
-            pianoEnd: {
-                model: {
-                    value: "{lou}.motionResponder.model.leftMotion"
-                }
-            },
-            guitarStart: {
-                model: {
-                    value: "{lou}.motionResponder.model.rightMotion"
-                }
-            },
-            guitarEnd: {
-                model: {
-                    value: "{lou}.motionResponder.model.rightMotion"
+            inputs: {
+                pianoStart: {
+                    value: "{motionResponder}.model.leftMotion"
+                },
+                pianoEnd: {
+                    value: "{motionResponder}.model.leftMotion"
+                },
+                guitarStart: {
+                    value: "{motionResponder}.model.rightMotion"
+                },
+                guitarEnd: {
+                    value: "{motionResponder}.model.rightMotion"
                 }
             }
         }
@@ -395,38 +403,6 @@
         }
     });
 
-    /**
-     * Represents a signal whose value is changed "behind the scenes" by some other process.
-     *
-     * To change this unit generator's value, update its model.value property.
-     */
-    colin.lou.ugen.dynamicValue = function (inputs, output, options) {
-        var that = flock.ugen(inputs, output, options);
-
-        that.gen = function (numSamps) {
-            var out = that.output,
-                m = that.model,
-                i;
-
-            for (i = 0; i < numSamps; i++) {
-                out[i] = m.value;
-            }
-
-            that.mulAdd(numSamps);
-        };
-
-        that.onInputChanged();
-        return that;
-    };
-
-    flock.ugenDefaults("colin.lou.ugen.dynamicValue", {
-        rate: "control",
-        ugenOptions: {
-            model: {
-                value: 0
-            }
-        }
-    });
 
     colin.lou.ugen.indexArray = function (inputs, output, options) {
         var that = flock.ugen(inputs, output, options);
