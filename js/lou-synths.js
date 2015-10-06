@@ -262,7 +262,7 @@
                     steps: 2,
                     source: {
                         ugen: "flock.ugen.latch",
-                        trig: {
+                        trigger: {
                             ugen: "flock.ugen.in",
                             bus: "{interconnects}.options.pianoClockBus"
                         },
@@ -308,7 +308,7 @@
                     steps: 2,
                     source: {
                         ugen: "flock.ugen.latch",
-                        trig: {
+                        trigger: {
                             ugen: "flock.ugen.in",
                             bus: "{interconnects}.options.guitarClockBus"
                         },
