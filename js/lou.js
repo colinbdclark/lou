@@ -1,8 +1,19 @@
 (function () {
     "use strict";
 
+    // Monkey-patch fluid.log for Electron's broken console.log.
+    fluid.doLog = function (args) {
+        if (typeof (console) !== "undefined") {
+            if (console.debug) {
+                console.debug(args.join(" "));
+            } else if (typeof (console.log) === "function") {
+                console.log(args.join(" "));
+            }
+        }
+    };
+
     flock.init({
-        numBuses: 6,
+        numBuses: 8,
         bufferSize: 8192
     });
 
