@@ -3,6 +3,14 @@
 (function () {
     "use strict";
 
+    fluid.defaults("colin.lou.interconnects", {
+        gradeNames: "fluid.component",
+
+        pianoClockBus: "@expand:{flock.enviro}.busManager.acquireNextBus(interconnect)",
+        guitarClockBus: "@expand:{flock.enviro}.busManager.acquireNextBus(interconnect)",
+        drumClockBus: "@expand:{flock.enviro}.busManager.acquireNextBus(interconnect)"
+    });
+
     // TODO: Convert this to a flock.band?
     fluid.defaults("colin.lou.instrument", {
         gradeNames: "fluid.component",
@@ -142,7 +150,7 @@
         pulse: 1.25,
 
         synthDef: {
-            bus: 2
+            bus: "{interconnects}.options.pianoClockBus"
         }
     });
 
@@ -153,7 +161,7 @@
         pulse: 1.5,
 
         synthDef: {
-            bus: 3
+            bus: "{interconnects}.options.guitarClockBus"
         }
     });
 
@@ -163,7 +171,7 @@
         pulse: 1,
 
         synthDef: {
-            bus: 4
+            bus: "{interconnects}.options.drumClockBus"
         },
 
         model: {
@@ -187,7 +195,7 @@
                 trigger: {
                     id: "drumTrigger",
                     ugen: "flock.ugen.in",
-                    bus: 4
+                    bus: "{interconnects}.options.drumClockBus"
                 },
                 buffer: {
                     id: "tom",
@@ -256,7 +264,7 @@
                         ugen: "flock.ugen.latch",
                         trig: {
                             ugen: "flock.ugen.in",
-                            bus: 2
+                            bus: "{interconnects}.options.pianoClockBus"
                         },
                         source: {
                             id: "pianoEnd",
@@ -271,7 +279,7 @@
                 trigger: {
                     id: "pianoTrigger",
                     ugen: "flock.ugen.in",
-                    bus: 2
+                    bus: "{interconnects}.options.pianoClockBus"
                 },
                 buffer: {
                     id: "dsharp-piano",
@@ -302,7 +310,7 @@
                         ugen: "flock.ugen.latch",
                         trig: {
                             ugen: "flock.ugen.in",
-                            bus: 3
+                            bus: "{interconnects}.options.guitarClockBus"
                         },
                         source: {
                             id: "guitarEnd",
@@ -317,7 +325,7 @@
                 trigger: {
                     id: "guitarTrigger",
                     ugen: "flock.ugen.in",
-                    bus: 3
+                    bus: "{interconnects}.options.guitarClockBus"
                 },
                 buffer: {
                     id: "csharp-guitar",

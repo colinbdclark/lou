@@ -31,6 +31,10 @@
 
             motionResponder: {
                 type: "colin.lou.motionResponder"
+            },
+
+            interconnects: {
+                type: "colin.lou.interconnects"
             }
         },
 
