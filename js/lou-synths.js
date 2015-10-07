@@ -11,14 +11,43 @@
         drumClockBus: "@expand:{flock.enviro}.busManager.acquireNextBus(interconnect)"
     });
 
-    // TODO: Convert this to a flock.band?
-    fluid.defaults("colin.lou.instrument", {
-        gradeNames: "fluid.component",
+    fluid.defaults("colin.lou.bufferLoader", {
+        gradeNames: "flock.bufferLoader",
 
-        invokers: {
-            play: "{flock.enviro}.play()",
-            stop: "{flock.enviro}.stop()"
+        bufferDefs: [
+            {
+                id: "high-piano",
+                url: "../audio/44100/dsharp-piano-44100.wav"
+            },
+            {
+                id: "low-piano",
+                url: "../audio/44100/low-f-piano-44100.wav"
+            },
+            {
+                id: "high-guitar",
+                url: "../audio/44100/csharp-guitar-44100.wav"
+            },
+            {
+                id: "low-guitar",
+                url: "../audio/44100/low-b-guitar-44100.wav"
+            }
+        ],
+
+        listeners: {
+            afterBuffersLoaded: [
+                // TODO: Remove this when triggerBuffers is fixed.
+                "colin.lou.bufferLoader.updateBufferUGens({right}.pianoGuitar)"
+            ]
         }
+    });
+
+    colin.lou.bufferLoader.updateBufferUGens = function (synth) {
+        synth.get("pianoPlayer").onInputChanged();
+        synth.get("guitarPlayer").onInputChanged();
+    };
+
+    fluid.defaults("colin.lou.instrument", {
+        gradeNames: "fluid.component"
     });
 
     fluid.defaults("colin.lou.instrument.all", {
@@ -110,7 +139,7 @@
                             source: {
                                 id: "motion",
                                 ugen: "flock.ugen.value",
-                                rate: "control",
+                                rate: "audio",
                                 value: 0,
                                 mul: 3
                             },
@@ -243,109 +272,54 @@
         synthDef: [
             // Piano
             {
-                ugen: "flock.ugen.playBuffer",
-                loop: 1.0,
-                mul: 0.25,
-                start: {
-                    ugen: "colin.lou.ugen.quantize",
-                    steps: 2,
-                    source: {
-                        id: "pianoStart",
-                        ugen: "flock.ugen.value",
-                        rate: "control",
-                        value: 0,
-                        mul: 2
-                    }
-                },
-                end: {
-                    ugen: "colin.lou.ugen.quantize",
-                    steps: 2,
-                    source: {
-                        ugen: "flock.ugen.latch",
-                        trigger: {
-                            ugen: "flock.ugen.in",
-                            bus: "{interconnects}.options.pianoClockBus"
-                        },
-                        source: {
-                            id: "pianoEnd",
-                            ugen: "flock.ugen.value",
-                            rate: "control",
-                            value: 0,
-                            mul: 2
-                        }
-                    },
-                    add: 0.5
-                },
+                id: "pianoPlayer",
+                ugen: "flock.ugen.triggerBuffers",
                 trigger: {
                     id: "pianoTrigger",
                     ugen: "flock.ugen.in",
                     bus: "{interconnects}.options.pianoClockBus"
                 },
-                buffer: {
-                    id: "dsharp-piano",
-                    url: "../audio/44100/piano-combined-44100.wav"
+                bufferIndex: {
+                    id: "pianoBufferIndex",
+                    ugen: "flock.ugen.value",
+                    rate: "audio",
+                    value: 0,
+                    mul: 2
+                },
+                options: {
+                    bufferIDs: ["high-piano", "low-piano"]
                 }
             },
 
             // Guitar
             {
-                ugen: "flock.ugen.playBuffer",
-                loop: 1.0,
-                mul: 0.5,
-                start: {
-                    ugen: "colin.lou.ugen.quantize",
-                    steps: 2,
-                    source: {
-                        id: "guitarStart",
-                        ugen: "flock.ugen.value",
-                        rate: "control",
-                        value: 0,
-                        mul: 2
-                    }
-                },
-                end: {
-                    ugen: "colin.lou.ugen.quantize",
-                    steps: 2,
-                    source: {
-                        ugen: "flock.ugen.latch",
-                        trigger: {
-                            ugen: "flock.ugen.in",
-                            bus: "{interconnects}.options.guitarClockBus"
-                        },
-                        source: {
-                            id: "guitarEnd",
-                            ugen: "flock.ugen.value",
-                            rate: "control",
-                            value: 0,
-                            mul: 2
-                        }
-                    },
-                    add: 0.5
-                },
+                id: "guitarPlayer",
+                ugen: "flock.ugen.triggerBuffers",
                 trigger: {
                     id: "guitarTrigger",
                     ugen: "flock.ugen.in",
                     bus: "{interconnects}.options.guitarClockBus"
                 },
-                buffer: {
-                    id: "csharp-guitar",
-                    url: "../audio/44100/guitar-combined-44100.wav"
+                bufferIndex: {
+                    id: "guitarBufferIndex",
+                    ugen: "flock.ugen.value",
+                    rate: "audio",
+                    value: 0,
+                    mul: 2
+                },
+                options: {
+                    bufferIDs: ["high-guitar", "low-guitar"]
                 }
             }
         ],
 
         model: {
             inputs: {
-                pianoStart: {
+                pianoBufferIndex: {
                     value: "{motionResponder}.model.leftMotion"
                 },
-                pianoEnd: {
-                    value: "{motionResponder}.model.leftMotion"
-                },
-                guitarStart: {
-                    value: "{motionResponder}.model.rightMotion"
-                },
-                guitarEnd: {
+
+                guitarBufferIndex: {
                     value: "{motionResponder}.model.rightMotion"
                 }
             }

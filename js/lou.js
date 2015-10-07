@@ -35,11 +35,15 @@
 
             interconnects: {
                 type: "colin.lou.interconnects"
+            },
+
+            bufferLoader: {
+                type: "colin.lou.bufferLoader"
             }
         },
 
         listeners: {
-            onCreate: [
+            "{bufferLoader}.events.afterBuffersLoaded": [
                 "{flock.enviro}.play()"
             ]
         }
