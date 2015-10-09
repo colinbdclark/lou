@@ -10,12 +10,15 @@
     "homepage": "http://github.com/colinbdclark/lou",
     "readmeFilename": "README.md",
     "dependencies": {
+        "infusion": "2.0.0-dev.20151007T134312Z.8c33cd4",
+        "dedupe-infusion": "1.0.0",
         "jquery": "2.1.4",
         "samfisher": "1.0.0",
         "flocking": "colinbdclark/flocking#core-refactoring",
         "electron-prebuilt": "0.33.2"
     },
     "scripts": {
-        "start": "electron main.js"
+        "dedupe-infusion": "node -e \"require('dedupe-infusion')();\"",
+        "start": "npm run dedupe-infusion && electron main.js"
     }
 }

@@ -1,5 +1,30 @@
+var fluid = fluid || require("infusion");
+
 (function () {
     "use strict";
+
+    var electron = fluid.registerNamespace("colin.electron");
+
+    electron.ipcSender = function (channel, target) {
+        var args = [channel];
+
+        return function () {
+            var len = arguments.length + 1;
+            args.length = len;
+            for (var i = 1; i < len; i++) {
+                args[i] = arguments[i - 1];
+            }
+
+            if (target) {
+                target.send.apply(target, args);
+            }
+        };
+    };
+
+    electron.ipcRelay = function (channel, target) {
+        require("ipc").on(channel, electron.ipcSender(channel, target));
+    };
+
 
     fluid.defaults("colin.electron.ipcComponent", {
         gradeNames: "fluid.component",
