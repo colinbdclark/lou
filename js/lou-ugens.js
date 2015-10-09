@@ -4,44 +4,6 @@
 
     fluid.registerNamespace("colin.lou.ugen");
 
-    colin.lou.ugen.indexArray = function (inputs, output, options) {
-        var that = flock.ugen(inputs, output, options);
-
-        that.gen = function (numSamps) {
-            var m = that.model,
-                out = that.output,
-                inputs = that.inputs,
-                list = that.inputs.list,
-                index = that.inputs.index.output,
-                i,
-                j,
-                indexRounded;
-
-            for (i = j = 0; i < numSamps; i++, j += m.strides.index) {
-                indexRounded = Math.round(index[j]);
-                indexRounded = indexRounded < 0 ? 0 : indexRounded > list.length ? list.length - 1 : indexRounded;
-                out[i] = list[indexRounded];
-            }
-
-            that.mulAdd(numSamps);
-        };
-
-        that.onInputChanged();
-        return that;
-    };
-
-    flock.ugenDefaults("colin.lou.ugen.indexArray", {
-        rate: "control",
-        inputs: {
-            index: 0,
-            list: []
-        },
-        ugenOptions: {
-            strideInputs: ["index"],
-            noExpand: ["list"]
-        }
-    });
-
     colin.lou.ugen.pulseToFreq = function (inputs, output, options) {
         var that = flock.ugen(inputs, output, options);
 
