@@ -62,11 +62,6 @@ fluid.defaults("colin.electron.browserWindow", {
                 "this": "{that}.win",
                 method: "on",
                 args: ["close", "{that}.events.onClose.fire"]
-            },
-            {
-                "this": "console",
-                method: "log",
-                args: "window onCreate done"
             }
         ],
 
