@@ -6,9 +6,12 @@
 
         channel: "motion",
 
-        distributeOptions: {
-            target: "{fisher.frameScheduler}.options.freq",
-            source: 10
+        components: {
+            scheduler: {
+                options: {
+                    freq: 10
+                }
+            }
         },
 
         listeners: {
