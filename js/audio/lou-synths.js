@@ -284,7 +284,7 @@
                     ugen: "flock.ugen.value",
                     rate: "audio",
                     value: 0,
-                    mul: 2
+                    mul: 3
                 },
                 options: {
                     bufferIDs: ["high-piano", "low-piano"]
@@ -305,7 +305,7 @@
                     ugen: "flock.ugen.value",
                     rate: "audio",
                     value: 0,
-                    mul: 2
+                    mul: 3
                 },
                 options: {
                     bufferIDs: ["high-guitar", "low-guitar"]

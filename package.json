@@ -13,7 +13,7 @@
         "infusion": "2.0.0-dev.20151007T134312Z.8c33cd4",
         "dedupe-infusion": "1.0.0",
         "jquery": "2.1.4",
-        "samfisher": "1.0.0",
+        "samfisher": "1.1.0",
         "flocking": "colinbdclark/flocking#core-refactoring",
         "electron-prebuilt": "0.33.2"
     },
