@@ -6,6 +6,11 @@
 
         channel: "motion",
 
+        distributeOptions: {
+            target: "{fisher.frameScheduler}.options.freq",
+            source: 10
+        },
+
         listeners: {
             onMotionUpdate: [
                 {
