@@ -1,0 +1,2 @@
+dtoverlay=hifiberry-dacplus
+gpu_mem=16
