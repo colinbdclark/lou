@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
-OLD_HOSTNAME="$( hostname )"
+#!/bin/bash
+#Assign existing hostname to $hostn
+OLD_HOSTNAME=$(cat /etc/hostname)
 NEW_HOSTNAME="$1"
 
 if [ -z "$NEW_HOSTNAME" ]; then
@@ -12,15 +13,12 @@ if [ -z "$NEW_HOSTNAME" ]; then
  exit 1
 fi
 
-echo "Changing hostname from $OLD_HOSTNAME to $NEW_HOSTNAME..."
+#Display existing hostname
+echo "Existing hostname is $OLD_HOSTNAME"
 
-hostname "$NEW_HOSTNAME"
+#change hostname in /etc/hosts & /etc/hostname
+sudo sed -i "s/$OLD_HOSTNAME/$NEW_HOSTNAME/g" /etc/hosts
+sudo sed -i "s/$OLD_HOSTNAME/$NEW_HOSTNAME/g" /etc/hostname
 
-sed -i "s/HOSTNAME=.*/HOSTNAME=$NEW_HOSTNAME/g" /etc/hostname
-
-if [ -n "$( grep "$OLD_HOSTNAME" /etc/hosts )" ]; then
- sed -i "s/$OLD_HOSTNAME/$NEW_HOSTNAME/g" /etc/hosts
-else
- echo -e "$( hostname -I | awk '{ print $1 }' )\t$NEW_HOSTNAME" >> /etc/hosts
-fi
-echo "Done."
+#display new hostname
+echo "Your new hostname is $NEW_HOSTNAME"
