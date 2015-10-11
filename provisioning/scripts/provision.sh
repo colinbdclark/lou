@@ -3,7 +3,7 @@ sudo ./install-packages.sh
 
 echo "Configuring host"
 sudo ./overlay-config.sh
-sudo ./set-hostname $1
+sudo ./set-hostname.sh $1
 sudo ./disable-root.sh
 
 echo "Installing application"
