@@ -19,7 +19,6 @@
     },
     "scripts": {
         "dedupe-infusion": "node -e \"require('dedupe-infusion')();\"",
-        "start": "npm run dedupe-infusion && electron main.js",
-        "start-headless": "xvfb-run npm start"
+        "start": "electron main.js"
     }
 }
