@@ -65,8 +65,11 @@ fluid.defaults("colin.electron.browserWindow", {
             }
         ],
 
-        onClose: [
-            "{that}.destroy()"
+        onDestroy: [
+            {
+                "this": "{that}.win",
+                method: "destroy"
+            }
         ]
     }
 });

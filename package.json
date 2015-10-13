@@ -13,9 +13,10 @@
         "infusion": "2.0.0-dev.20151007T134312Z.8c33cd4",
         "dedupe-infusion": "1.0.0",
         "jquery": "2.1.4",
+        "bergson": "0.10.0",
         "samfisher": "1.1.2",
         "flocking": "colinbdclark/flocking#core-refactoring",
-        "electron-prebuilt": "0.33.2"
+        "electron-prebuilt": "0.33.7"
     },
     "scripts": {
         "dedupe-infusion": "node -e \"require('dedupe-infusion')();\"",

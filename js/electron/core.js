@@ -15,6 +15,8 @@ var fluid = fluid || require("infusion");
                 args[i] = arguments[i - 1];
             }
 
+            // TODO: This will cause an error if "target"
+            // is a window that has already been closed.
             if (target) {
                 target.send.apply(target, args);
             }
