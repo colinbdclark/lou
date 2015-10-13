@@ -118,7 +118,6 @@ colin.lou.messageStatusChecker.checkHeartbeat = function (that) {
 
     var now = Date.now(),
         interval = (now - that.lastMessageTime) / 1000;
-        console.log(interval);
     if (interval > that.options.maxMessageInterval) {
         that.events.onMessageInterruption.fire();
     }
