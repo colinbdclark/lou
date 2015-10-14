@@ -9,7 +9,15 @@
         components: {
             scheduler: {
                 options: {
-                    freq: 10
+                    freq: 10,
+                    components: {
+                        clock: {
+                            type: "berg.clock.setInterval",
+                            options: {
+                                freq: "{motionTracker}.options.freq"
+                            }
+                        }
+                    }
                 }
             }
         },

@@ -2,8 +2,13 @@
 
 "use strict";
 
-var fluid = require("infusion");
+var app = require("app"),
+    fluid = require("infusion");
+
 fluid.registerNamespace("colin");
+
+app.commandLine.appendSwitch("disable-renderer-backgrounding");
+app.commandLine.appendSwitch("max-gum-fps", 15);
 
 fluid.defaults("colin.electron.app", {
     gradeNames: "fluid.modelComponent",
