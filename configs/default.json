@@ -1,4 +1,11 @@
 {
+    "distributeOptions": {
+        "target": "{/ colin.lou.app}.options.components.timedRegenerator",
+        "record": {
+            "type": "fluid.emptySubcomponent"
+        }
+    },
+
     "audioWindowURL": "%appRoot/html/all-voices.html",
     "syncTarget": "http://localhost:8080/lou/"
 }
