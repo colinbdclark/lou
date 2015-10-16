@@ -6,6 +6,18 @@ var app = require("app"),
     fluid = require("infusion"),
     colin = fluid.registerNamespace("colin");
 
+// Monkey-patch fluid.log for Electron's broken console.log.
+fluid.doLog = function (args) {
+    if (typeof (console) !== "undefined") {
+        if (console.debug) {
+            console.debug(args.join(" "));
+        } else if (typeof (console.log) === "function") {
+            console.log(args.join(" "));
+        }
+    }
+};
+
+
 fluid.defaults("colin.electron.app", {
     gradeNames: "fluid.modelComponent",
 

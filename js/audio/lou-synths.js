@@ -11,73 +11,23 @@
         drumClockBus: "@expand:{flock.enviro}.busManager.acquireNextBus(interconnect)"
     });
 
-    fluid.defaults("colin.lou.bufferLoader", {
-        gradeNames: "flock.bufferLoader",
 
-        bufferDefs: [
-            {
-                id: "high-piano",
-                url: "../audio/44100/dsharp-piano-44100.wav"
-            },
-            {
-                id: "low-piano",
-                url: "../audio/44100/low-f-piano-44100.wav"
-            },
-            {
-                id: "high-guitar",
-                url: "../audio/44100/csharp-guitar-44100.wav"
-            },
-            {
-                id: "low-guitar",
-                url: "../audio/44100/low-b-guitar-44100.wav"
-            }
-        ],
-
-        listeners: {
-            afterBuffersLoaded: [
-                // TODO: Remove this when triggerBuffers is fixed.
-                "colin.lou.bufferLoader.updateBufferUGens({right}.pianoGuitar)"
-            ]
-        }
-    });
-
-    colin.lou.bufferLoader.updateBufferUGens = function (synth) {
-        synth.get("pianoPlayer").onInputChanged();
-        synth.get("guitarPlayer").onInputChanged();
-    };
-
-    fluid.defaults("colin.lou.instrument", {
-        gradeNames: "fluid.component"
-    });
-
-    fluid.defaults("colin.lou.instrument.all", {
-        gradeNames: "colin.lou.instrument",
+    fluid.defaults("colin.lou.instrument.allVoices", {
+        gradeNames: "fluid.component",
 
         components: {
-            pianoClock: {
-                type: "colin.lou.synths.pianoClock"
+            pianoGuitarVoices: {
+                type: "colin.lou.instrument.pianoGuitarVoices"
             },
 
-            guitarClock: {
-                type: "colin.lou.synths.guitarClock"
-            },
-
-            drumClock: {
-                type: "colin.lou.synths.drumClock"
-            },
-
-            drumBass: {
-                type: "colin.lou.synths.drumBass"
-            },
-
-            pianoGuitar: {
-                type: "colin.lou.synths.pianoGuitar"
+            drumBassVoices: {
+                type: "colin.lou.instrument.drumBassVoices"
             }
         }
     });
 
-    fluid.defaults("colin.lou.instrument.left", {
-        gradeNames: "colin.lou.instrument",
+    fluid.defaults("colin.lou.instrument.drumBassVoices", {
+        gradeNames: "fluid.component",
 
         components: {
             drumClock: {
@@ -90,8 +40,9 @@
         }
     });
 
-    fluid.defaults("colin.lou.instrument.right", {
-        gradeNames: "colin.lou.instrument",
+
+    fluid.defaults("colin.lou.instrument.pianoGuitarVoices", {
+        gradeNames: "fluid.component",
 
         components: {
             pianoClock: {
@@ -104,6 +55,17 @@
 
             pianoGuitar: {
                 type: "colin.lou.synths.pianoGuitar"
+            },
+
+            bufferLoader: {
+                type: "colin.lou.pianoGuitarBufferLoader",
+                options: {
+                    listeners: {
+                        afterBuffersLoaded: [
+                            "{flock.enviro}.play()"
+                        ]
+                    }
+                }
             }
         }
     });
