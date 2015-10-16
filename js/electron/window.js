@@ -92,3 +92,13 @@ colin.electron.browserWindow.updateVisibility = function (win, isVisible) {
         win.hide();
     }
 };
+
+fluid.defaults("colin.electron.unthrottledWindow", {
+    gradeNames: "colin.electron.browserWindow",
+
+    windowOptions: {
+        "web-preferences": {
+            "page-visibility": true
+        }
+    }
+});

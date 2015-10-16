@@ -7,7 +7,7 @@ fluid.registerNamespace("colin");
 fluid.require(__dirname + "/../electron/window.js");
 
 fluid.defaults("colin.lou.trackingWindow", {
-    gradeNames: "colin.electron.browserWindow",
+    gradeNames: "colin.electron.unthrottledWindow",
 
     windowOptions: {
         title: "Motion tracker"

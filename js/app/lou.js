@@ -11,6 +11,11 @@ fluid.require(__dirname + "/../electron/app.js");
 fluid.defaults("colin.lou.app", {
     gradeNames: "colin.electron.app",
 
+    commandLineSwitches: {
+        "disable-renderer-backgrounding": null,
+        "max-gum-fps": 15
+    },
+
     components: {
         audioPlayer: {
             createOnEvent: "onReady",
@@ -32,7 +37,7 @@ fluid.defaults("colin.lou.app", {
         timedRegenerator: {
             type: "berg.clock.setInterval",
             options: {
-                freq: 1/3600, // Every hour.
+                freq: 1/2700, // Every 45 minutes.
                 listeners: {
                     onTick: [
                         "{app}.events.onCreateTracker.fire()",
@@ -43,22 +48,6 @@ fluid.defaults("colin.lou.app", {
                         }
                     ],
                     onCreate: "{that}.start()"
-                }
-            }
-        },
-
-        noMessageRegenerator: {
-            type: "colin.lou.messageStatusChecker",
-            options: {
-                listeners: {
-                    onMessageInterruption: [
-                        "{app}.events.onCreateTracker.fire()",
-                        {
-                            "this": "console",
-                            method: "error",
-                            args: ["A motion message hasn't been received recently. Restarting the motion tracker window."]
-                        }
-                    ]
                 }
             }
         }

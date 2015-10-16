@@ -5,7 +5,7 @@ fluid.registerNamespace("colin");
 fluid.require(__dirname + "/../electron/window.js");
 
 fluid.defaults("colin.lou.audioWindow", {
-    gradeNames: "colin.electron.browserWindow",
+    gradeNames: "colin.electron.unthrottledWindow",
 
     windowOptions: {
         title: "Audio"
