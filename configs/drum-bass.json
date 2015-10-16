@@ -1,0 +1,4 @@
+{
+    "audioWindowURL": "%appRoot/html/drum-bass.html",
+    "syncTarget": "http://flockpi2.local:8080/lou/"
+}

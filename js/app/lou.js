@@ -5,8 +5,10 @@
 var fluid = require("infusion"),
     colin = fluid.registerNamespace("colin"),
     berg = fluid.require("bergson");
+
 fluid.require(__dirname + "/../electron/core.js");
 fluid.require(__dirname + "/../electron/app.js");
+fluid.require(__dirname + "/config.js");
 
 fluid.defaults("colin.lou.app", {
     gradeNames: "colin.electron.app",

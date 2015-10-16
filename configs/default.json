@@ -1,0 +1,4 @@
+{
+    "audioWindowURL": "%appRoot/html/all-voices.html",
+    "syncTarget": "http://localhost:8080/lou/"
+}

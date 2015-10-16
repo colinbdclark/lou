@@ -1,0 +1,4 @@
+{
+    "audioWindowURL": "%appRoot/html/piano-guitar.html",
+    "syncTarget": "http://flockpi1.local:8080/lou/"
+}

@@ -12,7 +12,12 @@ fluid.defaults("colin.lou.audioWindow", {
     },
 
     model: {
-        url: "file://" + __dirname + "/../../html/audio.html",
+        url: {
+            expander: {
+                funcName: "fluid.stringTemplate",
+                args: ["{colin.lou.config}.options.audioWindowURL", "{app}.options.env"]
+            }
+        },
 
         dimensions: {
             width: 100,

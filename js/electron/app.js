@@ -15,6 +15,10 @@ fluid.defaults("colin.electron.app", {
 
     commandLineSwitches: {},
 
+    env: {
+        appRoot: "@expand:colin.electron.app.getRootPath()"
+    },
+
     windowListeners: {
         "onClose": "colin.electron.app.quitOnAllClosed()"
     },
@@ -59,4 +63,8 @@ colin.electron.app.setCommandLineSwitches = function (app, commandLineSwitches) 
             app.commandLine.appendSwitch(switchName, value);
         }
     });
+};
+
+colin.electron.app.getRootPath = function () {
+    return "file://" + process.cwd();
 };
