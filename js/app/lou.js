@@ -11,6 +11,11 @@ fluid.require(__dirname + "/../electron/app.js");
 fluid.defaults("colin.lou.app", {
     gradeNames: "colin.electron.app",
 
+    commandLineSwitches: {
+        "disable-renderer-backgrounding": null,
+        "max-gum-fps": 15
+    },
+
     components: {
         audioPlayer: {
             createOnEvent: "onReady",

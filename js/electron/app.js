@@ -3,12 +3,8 @@
 "use strict";
 
 var app = require("app"),
-    fluid = require("infusion");
-
-fluid.registerNamespace("colin");
-
-app.commandLine.appendSwitch("disable-renderer-backgrounding");
-app.commandLine.appendSwitch("max-gum-fps", 15);
+    fluid = require("infusion"),
+    colin = fluid.registerNamespace("colin");
 
 fluid.defaults("colin.electron.app", {
     gradeNames: "fluid.modelComponent",
@@ -16,6 +12,8 @@ fluid.defaults("colin.electron.app", {
     members: {
         app: require("app")
     },
+
+    commandLineSwitches: {},
 
     windowListeners: {
         "onClose": "colin.electron.app.quitOnAllClosed()"
@@ -28,6 +26,10 @@ fluid.defaults("colin.electron.app", {
 
     listeners: {
         onCreate: [
+            {
+                funcName: "colin.electron.app.setCommandLineSwitches",
+                args: ["{that}.app", "{that}.options.commandLineSwitches"]
+            },
             {
                 "this": "{that}.app",
                 method: "on",
@@ -48,3 +50,13 @@ fluid.defaults("colin.electron.app", {
         ]
     }
 });
+
+colin.electron.app.setCommandLineSwitches = function (app, commandLineSwitches) {
+    fluid.each(commandLineSwitches, function (value, switchName) {
+        if (value === null) {
+            app.commandLine.appendSwitch(switchName);
+        } else {
+            app.commandLine.appendSwitch(switchName, value);
+        }
+    });
+};
