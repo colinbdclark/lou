@@ -75,7 +75,7 @@ fluid.defaults("colin.electron.browserWindow", {
 colin.electron.browserWindow.create = function (windowOptions) {
     // The window size will always be initially be zero,
     // and when the model initializes, its dimensions will be updated.
-    var o = $.extend(true, {}, {
+    var o = $.extend(true, {}, windowOptions, {
         width: 0,
         height: 0
     });
