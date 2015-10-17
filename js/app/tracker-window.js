@@ -1,10 +1,10 @@
 "use strict";
 
 var fluid = require("infusion");
-require("../electron/window.js");
+require("infusion-electron");
 
 fluid.defaults("colin.lou.trackingWindow", {
-    gradeNames: "colin.electron.unthrottledWindow",
+    gradeNames: "electron.unthrottledWindow",
 
     windowOptions: {
         title: "Motion tracker"

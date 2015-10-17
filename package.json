@@ -16,7 +16,8 @@
         "bergson": "0.10.0",
         "samfisher": "1.1.2",
         "flocking": "colinbdclark/flocking#core-refactoring",
-        "electron-prebuilt": "0.33.7"
+        "electron-prebuilt": "0.33.7",
+        "infusion-electron": "colinbdclark/infusion-electron#initial-migration"
     },
     "scripts": {
         "dedupe-infusion": "node -e \"require('dedupe-infusion')();\"",

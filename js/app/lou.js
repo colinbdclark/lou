@@ -4,16 +4,19 @@ var fluid = require("infusion"),
     colin = fluid.registerNamespace("colin");
 
 require("bergson");
-require("../electron/core.js");
-require("../electron/app.js");
+require("infusion-electron");
 require("./config.js");
 
 fluid.defaults("colin.lou.app", {
-    gradeNames: "colin.electron.app",
+    gradeNames: "electron.app",
 
     commandLineSwitches: {
         "disable-renderer-backgrounding": null,
         "max-gum-fps": 15
+    },
+
+    env: {
+        appRoot: "@expand:colin.lou.app.getRootPath()"
     },
 
     components: {
@@ -23,7 +26,7 @@ fluid.defaults("colin.lou.app", {
             options: {
                 listeners: {
                     onCreate: [
-                        "colin.electron.ipcRelay(motion, {that}.win)"
+                        "electron.ipcRelay(motion, {that}.win)"
                     ]
                 }
             }
@@ -64,8 +67,13 @@ fluid.defaults("colin.lou.app", {
     }
 });
 
+colin.lou.app.getRootPath = function () {
+    return "file://" + process.cwd();
+};
+
+
 fluid.defaults("colin.lou.messageStatusChecker", {
-    gradeNames: ["berg.clock.setInterval", "colin.electron.ipcComponent"],
+    gradeNames: ["berg.clock.setInterval", "electron.ipcComponent"],
 
     channel: "motion",
 

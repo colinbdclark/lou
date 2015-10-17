@@ -4,7 +4,7 @@
     "use strict";
 
     fluid.defaults("colin.lou.motionResponder", {
-        gradeNames: ["colin.electron.ipcComponent", "fluid.modelComponent"],
+        gradeNames: ["electron.ipcComponent", "fluid.modelComponent"],
 
         channel: "motion",
 

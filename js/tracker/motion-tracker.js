@@ -4,7 +4,7 @@
     "use strict";
 
     fluid.defaults("colin.lou.motionTracker", {
-        gradeNames: ["fisher.motionTracker", "colin.electron.ipcComponent"],
+        gradeNames: ["fisher.motionTracker", "electron.ipcComponent"],
 
         channel: "motion",
 
