@@ -1,3 +1,5 @@
+/*global fluid, flock*/
+
 (function () {
     "use strict";
 

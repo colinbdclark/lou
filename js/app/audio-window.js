@@ -1,8 +1,7 @@
-/*jshint node: true*/
+"use strict";
 
 var fluid = require("infusion");
-fluid.registerNamespace("colin");
-fluid.require(__dirname + "/../electron/window.js");
+require("../electron/window.js");
 
 fluid.defaults("colin.lou.audioWindow", {
     gradeNames: "colin.electron.unthrottledWindow",

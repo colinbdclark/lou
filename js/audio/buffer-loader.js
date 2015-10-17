@@ -1,4 +1,4 @@
-/*global fluid, flock*/
+/*global fluid, colin*/
 
 (function () {
     "use strict";

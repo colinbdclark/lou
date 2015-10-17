@@ -1,5 +1,3 @@
-/*jshint node: true*/
-
 "use strict";
 
 var fluid = require("infusion"),
@@ -30,7 +28,7 @@ fluid.defaults("colin.electron.browserWindow", {
     },
 
     modelListeners: {
-        "dimensions.*": {
+        "dimensions": {
             "this": "{that}.win",
             method: "setSize",
             args: ["{that}.model.dimensions.width", "{that}.model.dimensions.height"]

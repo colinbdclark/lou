@@ -1,14 +1,12 @@
-/*jshint node: true*/
-
 "use strict";
 
 var fluid = require("infusion"),
-    colin = fluid.registerNamespace("colin"),
-    berg = fluid.require("bergson");
+    colin = fluid.registerNamespace("colin");
 
-fluid.require(__dirname + "/../electron/core.js");
-fluid.require(__dirname + "/../electron/app.js");
-fluid.require(__dirname + "/config.js");
+require("bergson");
+require("../electron/core.js");
+require("../electron/app.js");
+require("./config.js");
 
 fluid.defaults("colin.lou.app", {
     gradeNames: "colin.electron.app",

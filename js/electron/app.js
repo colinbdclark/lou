@@ -2,8 +2,7 @@
 
 "use strict";
 
-var app = require("app"),
-    fluid = require("infusion"),
+var fluid = require("infusion"),
     colin = fluid.registerNamespace("colin");
 
 // Monkey-patch fluid.log for Electron's broken console.log.

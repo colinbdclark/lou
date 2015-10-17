@@ -1,8 +1,9 @@
 var fluid = require("infusion");
 
-fluid.require(__dirname + "/js/app/audio-window.js");
-fluid.require(__dirname + "/js/app/tracker-window.js");
-fluid.require(__dirname + "/js/app/lou.js");
+require("./js/app/audio-window.js");
+require("./js/app/tracker-window.js");
+require("./js/app/lou.js");
 
-var colin = fluid.registerNamespace("colin"),
-    app = colin.lou.app();
+var colin = fluid.registerNamespace("colin");
+
+colin.lou.app();
