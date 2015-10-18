@@ -1,5 +1,6 @@
 {
     "name": "lou",
+    "productName": "Lou",
     "description": "Lou, a sound installation by Colin Clark",
     "main": "main.js",
     "version": "2.0.0",
@@ -16,7 +17,7 @@
         "bergson": "0.10.0",
         "samfisher": "1.1.2",
         "flocking": "colinbdclark/flocking#core-refactoring",
-        "electron-prebuilt": "0.33.7",
+        "electron-prebuilt": "0.34.0",
         "infusion-electron": "colinbdclark/infusion-electron#initial-migration"
     },
     "scripts": {
