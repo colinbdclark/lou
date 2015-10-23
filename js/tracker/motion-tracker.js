@@ -3,6 +3,8 @@
 (function () {
     "use strict";
 
+    fluid.defeatLogging = true;
+
     fluid.defaults("colin.lou.motionTracker", {
         gradeNames: ["fisher.motionTracker", "electron.ipcComponent"],
 
@@ -14,9 +16,9 @@
                     freq: 10,
                     components: {
                         clock: {
-                            type: "berg.clock.setInterval",
+                            type: "berg.clock.autoAudioContext",
                             options: {
-                                freq: "{motionTracker}.options.freq"
+                                blockSize: 4096
                             }
                         }
                     }

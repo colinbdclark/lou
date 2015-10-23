@@ -18,7 +18,7 @@
         "samfisher": "1.1.2",
         "flocking": "colinbdclark/flocking#core-refactoring",
         "electron-prebuilt": "0.34.0",
-        "infusion-electron": "colinbdclark/infusion-electron#initial-migration"
+        "infusion-electron": "colinbdclark/infusion-electron#ipc-relay"
     },
     "scripts": {
         "dedupe-infusion": "node -e \"require('dedupe-infusion')();\"",

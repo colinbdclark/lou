@@ -1,7 +1,7 @@
 "use strict";
 
-var fluid = require("infusion");
-require("infusion-electron");
+var fluid = require("infusion"),
+    electron = require("infusion-electron");
 
 fluid.defaults("colin.lou.audioWindow", {
     gradeNames: "electron.unthrottledWindow",
@@ -22,5 +22,28 @@ fluid.defaults("colin.lou.audioWindow", {
             width: 100,
             height: 100
         }
+    },
+
+    components: {
+        relayer: {
+            type: "colin.lou.audioWindow.relayer"
+        }
+    },
+
+    listeners: {
+        onClose: [
+            "{relayer}.stop()"
+        ]
+    }
+});
+
+fluid.defaults("colin.lou.audioWindow.relayer", {
+    gradeNames: "electron.ipcMessageRelayer",
+
+    channel: "motion",
+
+    members: {
+        source: electron.ipc,
+        target: "{audioWindow}.win"
     }
 });

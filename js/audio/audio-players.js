@@ -8,6 +8,8 @@
         bufferSize: 8192
     });
 
+    fluid.defeatLogging = true;
+
     fluid.defaults("colin.lou.audio", {
         gradeNames: "fluid.component",
 
