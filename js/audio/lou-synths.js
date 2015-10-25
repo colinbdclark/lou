@@ -3,6 +3,10 @@
 (function () {
     "use strict";
 
+    colin.lou.getHighestRootChannel = function (enviro) {
+        return enviro.audioSystem.model.chans / 2;
+    };
+
     fluid.defaults("colin.lou.interconnects", {
         gradeNames: "fluid.component",
 
@@ -177,47 +181,52 @@
     fluid.defaults("colin.lou.synths.drumBass", {
         gradeNames: "flock.modelSynth",
 
-        synthDef: [
-            // Drum
-            {
-                ugen: "flock.ugen.playBuffer",
-                loop: 1.0,
-                mul: 0.5,
-                trigger: {
-                    id: "drumTrigger",
-                    ugen: "flock.ugen.in",
-                    bus: "{interconnects}.options.drumClockBus"
-                },
-                buffer: {
-                    id: "tom",
-                    url: "../audio/44100/tom-44100.wav"
-                }
-            },
-
-            // Bass
-            {
-                ugen: "flock.ugen.sin",
-                freq: {
-                    ugen: "flock.ugen.math",
-                    rate: "audio",
-                    source: (146 * (2 / 3)) / 2,
-                    mul: {
-                        ugen: "flock.ugen.lag",
-                        rate: "audio",
-                        time: 10,
-                        source: {
-                            id: "motion",
-                            ugen: "flock.ugen.value",
-                            rate: "audio",
-                            value: 0,
-                            mul: 0.75,
-                            add: 1.0
-                        }
+        synthDef: {
+            ugen: "flock.ugen.out",
+            bus: "@expand:colin.lou.getHighestRootChannel({flock.enviro})",
+            expand: 1,
+            sources: [
+                // Drum
+                {
+                    ugen: "flock.ugen.playBuffer",
+                    loop: 1.0,
+                    mul: 0.5,
+                    trigger: {
+                        id: "drumTrigger",
+                        ugen: "flock.ugen.in",
+                        bus: "{interconnects}.options.drumClockBus"
+                    },
+                    buffer: {
+                        id: "tom",
+                        url: "../audio/44100/tom-44100.wav"
                     }
                 },
-                mul: 0.75
-            },
-        ],
+
+                // Bass
+                {
+                    ugen: "flock.ugen.sin",
+                    freq: {
+                        ugen: "flock.ugen.math",
+                        rate: "audio",
+                        source: (146 * (2 / 3)) / 2,
+                        mul: {
+                            ugen: "flock.ugen.lag",
+                            rate: "audio",
+                            time: 10,
+                            source: {
+                                id: "motion",
+                                ugen: "flock.ugen.value",
+                                rate: "audio",
+                                value: 0,
+                                mul: 0.75,
+                                add: 1.0
+                            }
+                        }
+                    },
+                    mul: 0.75
+                },
+            ]
+        },
 
         model: {
             inputs: {
@@ -231,49 +240,54 @@
     fluid.defaults("colin.lou.synths.pianoGuitar", {
         gradeNames: "flock.modelSynth",
 
-        synthDef: [
-            // Piano
-            {
-                id: "pianoPlayer",
-                ugen: "flock.ugen.triggerBuffers",
-                trigger: {
-                    id: "pianoTrigger",
-                    ugen: "flock.ugen.in",
-                    bus: "{interconnects}.options.pianoClockBus"
+        synthDef: {
+            ugen: "flock.ugen.out",
+            bus: 0,
+            expand: 1,
+            sources: [
+                // Piano
+                {
+                    id: "pianoPlayer",
+                    ugen: "flock.ugen.triggerBuffers",
+                    trigger: {
+                        id: "pianoTrigger",
+                        ugen: "flock.ugen.in",
+                        bus: "{interconnects}.options.pianoClockBus"
+                    },
+                    bufferIndex: {
+                        id: "pianoBufferIndex",
+                        ugen: "flock.ugen.value",
+                        rate: "audio",
+                        value: 0,
+                        mul: 3
+                    },
+                    options: {
+                        bufferIDs: ["high-piano", "low-piano"]
+                    }
                 },
-                bufferIndex: {
-                    id: "pianoBufferIndex",
-                    ugen: "flock.ugen.value",
-                    rate: "audio",
-                    value: 0,
-                    mul: 3
-                },
-                options: {
-                    bufferIDs: ["high-piano", "low-piano"]
-                }
-            },
 
-            // Guitar
-            {
-                id: "guitarPlayer",
-                ugen: "flock.ugen.triggerBuffers",
-                trigger: {
-                    id: "guitarTrigger",
-                    ugen: "flock.ugen.in",
-                    bus: "{interconnects}.options.guitarClockBus"
-                },
-                bufferIndex: {
-                    id: "guitarBufferIndex",
-                    ugen: "flock.ugen.value",
-                    rate: "audio",
-                    value: 0,
-                    mul: 3
-                },
-                options: {
-                    bufferIDs: ["high-guitar", "low-guitar"]
+                // Guitar
+                {
+                    id: "guitarPlayer",
+                    ugen: "flock.ugen.triggerBuffers",
+                    trigger: {
+                        id: "guitarTrigger",
+                        ugen: "flock.ugen.in",
+                        bus: "{interconnects}.options.guitarClockBus"
+                    },
+                    bufferIndex: {
+                        id: "guitarBufferIndex",
+                        ugen: "flock.ugen.value",
+                        rate: "audio",
+                        value: 0,
+                        mul: 3
+                    },
+                    options: {
+                        bufferIDs: ["high-guitar", "low-guitar"]
+                    }
                 }
-            }
-        ],
+            ]
+        },
 
         model: {
             inputs: {

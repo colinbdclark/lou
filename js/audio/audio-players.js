@@ -4,8 +4,9 @@
     "use strict";
 
     flock.init({
-        numBuses: 8,
-        bufferSize: 8192
+        numBuses: 12,
+        bufferSize: 2048,
+        chans: 4
     });
 
     fluid.defeatLogging = true;
