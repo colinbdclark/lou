@@ -15,20 +15,6 @@
         },
 
         components: {
-            scheduler: {
-                options: {
-                    freq: 10,
-                    components: {
-                        clock: {
-                            type: "berg.clock.autoAudioContext",
-                            options: {
-                                blockSize: 4096
-                            }
-                        }
-                    }
-                }
-            },
-
             streamer: {
                 options: {
                     source: "{motionTracker}.options.source"
