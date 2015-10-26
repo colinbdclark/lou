@@ -5,7 +5,7 @@
 
     flock.init({
         numBuses: 12,
-        bufferSize: 2048,
+        bufferSize: 4096,
         chans: 4
     });
 
