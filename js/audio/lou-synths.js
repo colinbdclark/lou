@@ -198,7 +198,7 @@
                     },
                     buffer: {
                         id: "tom",
-                        url: "../audio/44100/tom-44100.wav"
+                        url: "../../audio/44100/tom-44100.wav"
                     }
                 },
 

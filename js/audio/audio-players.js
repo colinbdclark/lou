@@ -15,10 +15,6 @@
         gradeNames: "fluid.modelComponent",
 
         components: {
-            motionTarget: {
-                type: "colin.lou.quadraphonicMotionTarget"
-            },
-
             interconnects: {
                 type: "colin.lou.interconnects"
             }
@@ -35,8 +31,36 @@
         }
     });
 
+    fluid.defaults("colin.lou.audio.twoCameras", {
+        gradeNames: "fluid.modelComponent",
+
+        components: {
+            motionTarget: {
+                type: "colin.lou.quadraphonicMotionTarget"
+            }
+        }
+    });
+
+    fluid.defaults("colin.lou.audio.twoCamerasAll", {
+        gradeNames: ["colin.lou.audio.twoCameras", "colin.lou.audio.all"],
+    });
+
+    fluid.defaults("colin.lou.audio.singleCamera", {
+        gradeNames: "fluid.modelComponent",
+
+        components: {
+            motionTarget: {
+                type: "colin.lou.stereoToQuadMotionTarget"
+            }
+        }
+    });
+
+    fluid.defaults("colin.lou.audio.singleCameraAll", {
+        gradeNames: ["colin.lou.audio.singleCamera", "colin.lou.audio.all"],
+    });
+
     fluid.defaults("colin.lou.audio.pianoGuitar", {
-        gradeNames: "colin.lou.audio",
+        gradeNames: ["colin.lou.audio.singleCamera", "colin.lou.audio"],
 
         components: {
             instrument: {
@@ -46,7 +70,7 @@
     });
 
     fluid.defaults("colin.lou.audio.drumBass", {
-        gradeNames: "colin.lou.audio",
+        gradeNames: ["colin.lou.audio.singleCamera", "colin.lou.audio"],
 
         components: {
             instrument: {

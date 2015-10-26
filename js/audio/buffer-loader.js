@@ -9,19 +9,19 @@
         bufferDefs: [
             {
                 id: "high-piano",
-                url: "../audio/44100/dsharp-piano-44100.wav"
+                url: "../../audio/44100/dsharp-piano-44100.wav"
             },
             {
                 id: "low-piano",
-                url: "../audio/44100/low-f-piano-44100.wav"
+                url: "../../audio/44100/low-f-piano-44100.wav"
             },
             {
                 id: "high-guitar",
-                url: "../audio/44100/csharp-guitar-44100.wav"
+                url: "../../audio/44100/csharp-guitar-44100.wav"
             },
             {
                 id: "low-guitar",
-                url: "../audio/44100/low-b-guitar-44100.wav"
+                url: "../../audio/44100/low-b-guitar-44100.wav"
             }
         ],
 

@@ -1,4 +1,5 @@
 {
-    "audioWindowURL": "%appRoot/html/drum-bass.html",
+    "trackerWindowURL": "%appRoot/html/tracker/single-camera-motion-tracker.html",
+    "audioWindowURL": "%appRoot/html/audio/drum-bass.html",
     "syncTarget": "http://flockpi2.local:8080/lou/"
 }

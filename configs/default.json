@@ -1,11 +1,5 @@
 {
-    "distributeOptions": {
-        "target": "{/ colin.lou.app}.options.components.timedRegenerator",
-        "record": {
-            "type": "fluid.emptySubcomponent"
-        }
-    },
-
-    "audioWindowURL": "%appRoot/html/all-voices.html",
+    "trackerWindowURL": "%appRoot/html/tracker/two-camera-motion-tracker.html",
+    "audioWindowURL": "%appRoot/html/audio/two-camera-all-voices.html",
     "syncTarget": "http://localhost:8080/lou/"
 }

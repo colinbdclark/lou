@@ -11,7 +11,12 @@ fluid.defaults("colin.lou.trackingWindow", {
     },
 
     model: {
-        url: "file://" + __dirname + "/../../html/motion-tracker.html",
+        url: {
+            expander: {
+                funcName: "fluid.stringTemplate",
+                args: ["{colin.lou.config}.options.trackerWindowURL", "{app}.options.env"]
+            }
+        },
 
         dimensions: {
             width: 640,
