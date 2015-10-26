@@ -3,8 +3,8 @@
 (function () {
     "use strict";
 
-    colin.lou.getHighestRootChannel = function (enviro) {
-        return enviro.audioSystem.model.chans / 2;
+    colin.lou.getFirstBackChannel = function (enviro) {
+        return enviro.audioSystem.model.chans > 2 ? 2 : 0;
     };
 
     fluid.defaults("colin.lou.interconnects", {
@@ -172,7 +172,7 @@
         model: {
             inputs: {
                 motion: {
-                    value: "{motionResponder}.model.leftMotion"
+                    value: "{motionTarget}.model.back.leftMotion"
                 }
             }
         }
@@ -183,7 +183,7 @@
 
         synthDef: {
             ugen: "flock.ugen.out",
-            bus: "@expand:colin.lou.getHighestRootChannel({flock.enviro})",
+            bus: 0,
             expand: 1,
             sources: [
                 // Drum
@@ -231,7 +231,7 @@
         model: {
             inputs: {
                 motion: {
-                    value: "{motionResponder}.model.rightMotion"
+                    value: "{motionTarget}.model.back.rightMotion"
                 }
             }
         }
@@ -242,7 +242,7 @@
 
         synthDef: {
             ugen: "flock.ugen.out",
-            bus: 0,
+            bus: "@expand:colin.lou.getFirstBackChannel({flock.enviro})",
             expand: 1,
             sources: [
                 // Piano
@@ -292,11 +292,11 @@
         model: {
             inputs: {
                 pianoBufferIndex: {
-                    value: "{motionResponder}.model.leftMotion"
+                    value: "{motionTarget}.model.front.leftMotion"
                 },
 
                 guitarBufferIndex: {
-                    value: "{motionResponder}.model.rightMotion"
+                    value: "{motionTarget}.model.front.rightMotion"
                 }
             }
         }

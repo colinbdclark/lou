@@ -12,11 +12,11 @@
     fluid.defeatLogging = true;
 
     fluid.defaults("colin.lou.audio", {
-        gradeNames: "fluid.component",
+        gradeNames: "fluid.modelComponent",
 
         components: {
-            motionResponder: {
-                type: "colin.lou.motionResponder"
+            motionTarget: {
+                type: "colin.lou.quadraphonicMotionTarget"
             },
 
             interconnects: {

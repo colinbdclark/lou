@@ -25,14 +25,25 @@ fluid.defaults("colin.lou.audioWindow", {
     },
 
     components: {
-        relayer: {
-            type: "colin.lou.audioWindow.relayer"
+        frontRelayer: {
+            type: "colin.lou.audioWindow.relayer",
+            options: {
+                channel: "frontMotion"
+            }
+        },
+
+        backRelayer: {
+            type: "colin.lou.audioWindow.relayer",
+            options: {
+                channel: "backMotion"
+            }
         }
     },
 
     listeners: {
         onClose: [
-            "{relayer}.stop()"
+            "{frontRelayer}.stop()",
+            "{backRelayer}.stop()"
         ]
     }
 });

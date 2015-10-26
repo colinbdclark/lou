@@ -11,8 +11,7 @@ fluid.defaults("colin.lou.app", {
     gradeNames: "electron.app",
 
     commandLineSwitches: {
-        "disable-renderer-backgrounding": null,
-        "max-gum-fps": 15
+        "disable-renderer-backgrounding": null
     },
 
     env: {
@@ -28,10 +27,6 @@ fluid.defaults("colin.lou.app", {
         tracker: {
             createOnEvent: "onCreateTracker",
             type: "colin.lou.trackingWindow"
-        },
-
-        timedRegenerator: {
-            type: "colin.lou.trackerRegenerator"
         }
     },
 
